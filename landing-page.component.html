@@ -1,0 +1,189 @@
+<html class=cont
+  [ngStyle]="{backgroundImage:'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtRFNtufYx_oU-UYKJ0wJ-V15Rsc6sF0Fuxg&usqp=CAU'}">
+
+<div class="out">
+  <a routerLink="../login_page" href="login-page.component.html" style="margin-left: 1200px; ">Sign Out</a>
+</div>
+
+
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Providers</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" (click)="openPopup()">Add a Provider</a></li>
+            <li><a class="dropdown-item" href="#">Update Provider</a></li>
+            <li><a class="dropdown-item" href="#">Suspend Provider</a></li>
+            <li><a class="dropdown-item" href="#">Activate Provider</a></li>
+            <li><a class="dropdown-item" href="#">Delete Provider</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Consumers</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item">Add a consumer</a></li>
+            <li><a class="dropdown-item" href="#">Update consumer</a></li>
+            <li><a class="dropdown-item" href="#">Suspend consumer</a></li>
+            <li><a class="dropdown-item" href="#">Activate consumer</a></li>
+            <li><a class="dropdown-item" href="#">Delete consumer</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Events</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Provider</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="providerDetailsGroup" (ngSubmit)="onproviderDetailsGroupSubmit(providerDetailsGroup)">
+          <div class="mb-3 mt-3">
+            <label for="providerName" class="form-label">Provider Name:</label>
+            <input type="text" class="form-control" formControlName="providerName" placeholder="Enter name"
+              name="providerName">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="providerDetailsGroup.controls['providerName'].dirty">
+            <label for="pushOrpull" class="form-label">Push/Pull event:</label>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" formControlName="pushOrpull" id="push" name="pushOrpull"
+                value="push" checked>Push
+              <label class="form-check-label" for="push"></label>
+            </div>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" formControlName="pushOrpull" id="pull" name="pushOrpull"
+                value="pull" checked>Pull
+              <label class="form-check-label" for="pull"></label>
+            </div>
+          </div>
+          <div class="mb-3 mt-3" *ngIf="providerDetailsGroup.controls['pushOrpull'].dirty">
+            <label for="connectionType" class="form-label">Connection Type:</label>
+            <select class="form-select" formControlName="connectionType" (click)="connectionTypeValue()">
+              <option value="">Select Connection Type</option>
+              <option value="DB">DB</option>
+              <option value="HTTP">HTTP</option>
+            </select>
+          </div>
+          <div class="mb-3 mt-3" *ngIf="displayDB">
+            <label for="hostName" class="form-label">Host Name:</label>
+            <input type="text" class="form-control" formControlName="hostName" placeholder="Enter host name"
+              name="hostName">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="displayDB">
+            <label for="port" class="form-label">Port:</label>
+            <input type="text" class="form-control" formControlName="port" placeholder="" name="port">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="displayDB">
+            <label for="serviceName" class="form-label">Service Name:</label>
+            <input type="text" class="form-control" formControlName="serviceName" placeholder="" name="serviceName">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="displayDB">
+            <label for="otherProps" class="form-label">Other Properties:</label>
+            <input type="text" class="form-control" formControlName="otherProps" placeholder="" name="otherProps">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="displayHTTP">
+            <label for="url" class="form-label">URL:</label>
+            <input type="text" class="form-control" formControlName="url" placeholder="" name="url">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="displayHTTP">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" class="form-control" formControlName="username" placeholder="" name="username">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="displayHTTP">
+            <label for="password" class="form-label">Password:</label>
+            <input type="text" class="form-control" formControlName="password" placeholder="" name="password">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="displayHTTP">
+            <label for="apiKey" class="form-label">API key:</label>
+            <input type="text" class="form-control" formControlName="apiKey" placeholder="" name="apiKey">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="displayHTTP">
+            <label for="otherProps2" class="form-label">Other Properties:</label>
+            <input type="text" class="form-control" formControlName="otherProps2" placeholder="" name="otherProps2">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="providerDetailsGroup.controls['connectionType'].dirty">
+            <label for="eventType" class="form-label">Event Type:</label>
+            <input type="email" class="form-control" formControlName="eventType" placeholder="Enter eventType"
+              name="eventType">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="providerDetailsGroup.controls['eventType'].dirty">
+            <label for="orderOfEvents" class="form-label">Order of events processing:</label>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="serial" name="orderOfEvents" value="serial" checked
+                formControlName="orderOfEvents">Serial
+              <label class="form-check-label" for="serial"></label>
+            </div>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="concurrent" name="orderOfEvents" value="concurrent"
+                checked formControlName="orderOfEvents">Concurrent
+              <label class="form-check-label" for="concurrent"></label>
+            </div>
+          </div>
+          <div class="mb-3 mt-3" *ngIf="providerDetailsGroup.controls['orderOfEvents'].dirty">
+            <label for="techContact" class="form-label">Provider Tech POC Contact:</label>
+            <input type="text" class="form-control" formControlName="techContact" placeholder="" name="techContact">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="providerDetailsGroup.controls['techContact'].dirty">
+            <label for="techEmail" class="form-label">Provider Tech POC Email ID:</label>
+            <input type="text" class="form-control" formControlName="techEmail" placeholder="" name="techEmail">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="providerDetailsGroup.controls['techEmail'].dirty">
+            <label for="businessContact" class="form-label">Provider Business POC Contact:</label>
+            <input type="text" class="form-control" formControlName="businessContact" placeholder=""
+              name="businessContact">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="providerDetailsGroup.controls['businessContact'].dirty">
+            <label for="businessEmail" class="form-label">Provider Business POC Email ID:</label>
+            <input type="text" class="form-control" formControlName="businessEmail" placeholder="" name="businessEmail">
+          </div>
+          <div class="mb-3 mt-3" *ngIf="providerDetailsGroup.controls['businessEmail'].dirty">
+            <label for="alertNotification" class="form-label">Alert Notification:</label>
+            <select class="form-select" formControlName="alertNotification">
+              <option>Email</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closePopup()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>
+
+
+
+
+
+<style>
+  .cont {
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .frm {
+    padding-top: 100px;
+  }
+</style>
