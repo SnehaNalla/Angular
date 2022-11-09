@@ -1,0 +1,36 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+  <div class="mb-3 mt-3">
+    <label for="email" class="form-label">Email:</label>
+    <input type="text" id="email" name="email" #name="ngModel" [(ngModel)]="user.email" placeholder="Your email"
+      required minlength="1" maxlength="250" class="form-control form-control-sm"
+      [class.is-invalid]="name.invalid && (name.dirty || name.touched)" style="width:400px;display:block;margin:auto;">
+      <div *ngIf= "email.invalid && (email.touched || email.dirty)">
+          <div *ngIf= "email.errors" class="alert alert-danger">
+            Email Mandatory
+          </div>
+        </div>
+  </div>
+  <div class="mb-3">
+    <label for="pwd" class="form-label">Password:</label>
+    <input type="text" id="password" name="password" #name="ngModel" [(ngModel)]="user.password"
+      placeholder="Please enter your password" required minlength="1" maxlength="250"
+      class="form-control form-control-sm" [class.is-invalid]="name.invalid && (name.dirty || name.touched)"
+      style="width:400px;display:block;margin:auto;">
+    <div *ngIf= "password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+      <div *ngIf= "password.errors">
+        This field is required. 
+      </div>
+    </div>
+  </div>
+  <div class="form-check mb-3">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" name="remember"> Remember me
+    </label>
+  </div>
+  <button type="submit" class="btn btn-primary mb-2">Submit</button><br>
+  <button type="reset" class="btn btn-primary" (click)="form.reset()">Reset</button>
+</form><br>
+<p>Given Data</p>
+<p>{{jsonResult | json}}</p>
+
+

@@ -1,0 +1,83 @@
+<h2>Student Details</h2>
+{{Name}}
+{{Gender}}
+{{School}}
+{{Class}}
+{{Subject}}
+{{Score}}<br>
+<input type = 'string' name="data" [(ngModel)] = 'data'>
+<p>{{data}}</p>
+<h3 *ngIf="i == 1" [style.color]="color1">Testing ngIf</h3>
+<button [disabled]="isDisabled" [style.color]="color" (click)="myclickfunction()">{{buttonName}}</button>
+
+<hr>
+<p *ngFor="let color of colors">{{color.name}}</p>
+<hr>
+<div [ngSwitch] = "showMe">
+    <p *ngSwitchCase="'p1'" appHighlight>Displaying Para1 using ngSwitchCase</p>
+    <p *ngSwitchCase="'p2'" appHighlight>Displaying Para2 using ngSwitchCase</p>
+</div>
+
+<button appHighlight>One</button> 
+<p appHighlight>Testing directive with color change</p>
+
+Parent to Child Communication Example:
+<app-parent></app-parent>
+<hr>
+<h1>Pipes</h1>
+<table>
+    <thead>
+        <th>Name</th>
+        <th>Custom pipe counting characters</th>
+        <th>Payment</th>
+        <th>Date</th>
+        <th>Short Date</th>
+        <th>Full Date</th>
+        <th>Formatted Date</th>
+        <th>Hours and Minutes</th>
+        <th>Activities</th>
+        <th>Number Pipe</th>
+        <th>Percentage Pipe</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let class of classes">
+            <td>
+                {{class.name | uppercase}}
+            </td>
+            <td>
+                {{class.name | stringcount}}
+            </td>
+            <td>
+                {{class.class | currency:'INR'}}
+            </td>
+            <td>
+                {{today | date | uppercase}}
+            </td>
+            <td>
+                {{today | date: 'shortDate'}}
+            </td>
+            <td>
+                {{today | date: 'fullDate'}}
+            </td>
+            <td>
+                {{today | date: 'M/dd/yyyy'}}
+            </td>
+            <td>
+                {{today | date: 'h:mm'}}
+            </td>
+            <td>
+                {{activities | slice:1:4}}
+            </td>
+            <td>
+                {{digitI | number:'4.1'}}
+            </td>
+            <td>
+                {{percentage | percent:'2.2'}}
+            </td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<h3>Json Pipe</h3>
+{{classes | json}}
+

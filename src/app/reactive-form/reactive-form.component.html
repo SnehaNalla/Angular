@@ -1,0 +1,109 @@
+<p>reactive-forms works!</p>
+<div class="row">
+  <div class="col">
+    <h1>Personal Details</h1>
+    <form [formGroup]="loginGroup" (ngSubmit)="onSubmit(loginGroup)">
+      <div class="mb-3 mt-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email"
+          formControlName="email" style="width:400px;display:block;margin:auto;">
+          <div
+          *ngIf="loginGroup.controls['email'].invalid && (loginGroup.controls['email'].touched || loginGroup.controls['email'].dirty)">
+          <div *ngIf="loginGroup.controls['email'].errors " class="alert alert-danger">
+            Email Mandatory
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="pwd" class="form-label">Password:</label>
+        <input type="password" class="form-control" id="pswd" placeholder="Enter password" name="pswd"
+          formControlName="pswd" style="width:400px;display:block;margin:auto;">
+          <div
+          *ngIf="loginGroup.controls['pswd'].invalid && (loginGroup.controls['pswd'].touched || loginGroup.controls['pswd'].dirty)">
+          <div *ngIf="loginGroup.controls['pswd'].errors" class="alert alert-danger">
+            Please enter the password
+          </div>
+        </div>
+      </div>
+      <div class="form-check mb-3">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" name="remember"> Remember me
+        </label>
+      </div>
+      <div formGroupName="addressGroup">
+        <div class="mb-3 mt-3">
+          <label for="address" class="form-label">address:</label>
+          <input type="text" class="form-control" id="address" placeholder="Enter address" name="address"
+            formControlName="address" style="width:400px;display:block;margin:auto;">
+            <div
+            *ngIf="addressGroup.controls['address'].invalid && (addressGroup.controls['address'].touched || addressGroup.controls['address'].dirty)">
+            <div *ngIf="addressGroup.controls['address'].errors" class="alert alert-danger">
+              Mandatory field
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="phone" class="form-label">Phone:</label>
+          <input type="number" class="form-control" id="phone" placeholder="Enter phone number" name="phone"
+            formControlName="phone" style="width:400px;display:block;margin:auto;">
+            <div
+            *ngIf="addressGroup.controls['phone'].invalid && (addressGroup.controls['phone'].touched || addressGroup.controls['address'].dirty)">
+            <div *ngIf="addressGroup.controls['phone'].errors" class="alert alert-danger">
+              Required field
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Personal Sign In</button>
+    </form>
+  </div>
+  <div class="col">
+    <h1>Credit Details</h1>
+    <form [formGroup]="creditDetailsGroup" (ngSubmit)="onCreditDetailsGroupSubmit(creditDetailsGroup)">
+      <div class="mb-3 mt-3">
+        <label for="card" class="form-label">Card Number:</label>
+        <input type="text" class="form-control" id="card" placeholder="Enter card number" name="card"
+          formControlName="card" style="width:400px;display:block;margin:auto;">
+          <div *ngIf="creditDetailsGroup.controls['card'].touched && creditDetailsGroup.controls['card'].invalid"
+          class="alert alert-danger">
+          <div *ngIf="creditDetailsGroup.controls['card'].errors && creditDetailsGroup.controls['card'].errors['required']">
+            Card number is required.</div>
+          <div *ngIf="creditDetailsGroup.controls['card'].errors && creditDetailsGroup.controls['card'].errors['minlength']">
+            Please enter 5 chars.</div>
+          <div *ngIf="creditDetailsGroup.controls['card'].errors && creditDetailsGroup.controls['card'].errors['pattern']">
+            Please enter only numbers</div>
+        </div>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="expiry" class="form-label">Expiry Date:</label>
+        <input type="date" class="form-control" id="expiry" placeholder="Enter date" name="expiry"
+          formControlName="expiry" style="width:400px;display:block;margin:auto;">
+          <div *ngIf="creditDetailsGroup.controls['expiry'].touched && creditDetailsGroup.controls['expiry'].invalid"
+          class="alert alert-danger">Please enter the date</div>   
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" 
+        formControlName="name"  style="width:400px;display:block;margin:auto;">
+        <div *ngIf="creditDetailsGroup.controls['name'].touched && creditDetailsGroup.controls['name'].invalid"
+        class="alert alert-danger">
+        <div *ngIf="creditDetailsGroup.controls['name'].errors && creditDetailsGroup.controls['name'].errors['required']">
+          Name is required.</div>
+        <div *ngIf="creditDetailsGroup.controls['name'].errors && creditDetailsGroup.controls['name'].errors['pattern']">
+          Starts with a and ends with z with four char </div>
+        </div>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email"
+          formControlName="email" style="width:400px;display:block;margin:auto;">
+          <div *ngIf="creditDetailsGroup.controls['email'].touched && creditDetailsGroup.controls['email'].invalid"
+        class="alert alert-danger">
+        <div *ngIf="creditDetailsGroup.controls['email'].errors && creditDetailsGroup.controls['email'].errors['required']">
+          Enter email</div>
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="creditDetailsGroup.invalid">Credit Sign In</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<html class=cont
+  [ngStyle]="{backgroundImage:'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz1h_-DHt_1j0BvXQcHrNCtwE8pxs5cbkMwA&usqp=CAU)'}">
+<form [formGroup]="loginGroup" (ngSubmit)="formSubmit(loginGroup)" class="frm">
+  <div class="mb-3 mt-3">
+    <label for="username" class="form-label">Username:</label>
+    <input type="text" class="form-control" id="username" placeholder="Enter username" name="username"
+      formControlName="username" style="width:400px;display:block;margin:auto;">
+    <div
+      *ngIf="loginGroup.controls['username'].invalid && (loginGroup.controls['username'].touched || loginGroup.controls['username'].dirty)">
+      <div *ngIf="loginGroup.controls['username'].errors " class="alert alert-danger">
+        Username Mandatory
+      </div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password:</label>
+    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"
+      formControlName="password" style="width:400px;display:block;margin:auto;">
+    <div
+      *ngIf="loginGroup.controls['password'].invalid && (loginGroup.controls['password'].touched || loginGroup.controls['password'].dirty)">
+      <div *ngIf="loginGroup.controls['password'].errors" class="alert alert-danger">
+        Please enter the password
+      </div>
+    </div>
+  </div>
+  <div class="form-check mb-3">
+  </div>
+  <button type="submit" class="btn btn-primary">Log In</button>
+</form>
+<router-outlet></router-outlet>
+
+</html>
+<style>
+  .cont {
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .frm {
+    padding-top: 100px;
+  }
+</style>

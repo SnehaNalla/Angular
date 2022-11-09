@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col">
+    <h1>Pizza Orders</h1>
+    <table class="table table-hover">
+      <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Toppings</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pizza of pizzaList">
+          <td>
+            {{pizza.id }}
+          </td>
+          <td>
+            {{pizza.name }}
+          </td>
+          <td>
+            {{pizza.type}}
+          </td>
+          <td>
+            {{pizza.ppu}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)="onDelete(pizza)">Delete entry</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <h3>Order Pizza</h3>
+    <form [formGroup]="pizzaGroup" (ngSubmit)="pizzaSubmit(pizzaGroup)" #pizzaForm="ngForm">
+      <div class="mb-3 mt-3">
+        <label for="id" class="form-label">Id:</label>
+        <input type="text" class="form-control" id="id" placeholder="Enter id" name="id" formControlName="id"
+          style="width:400px;display:block;margin:auto;">
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="type" class="form-label">Type:</label>
+        <input type="text" class="form-control" id="type" placeholder="Enter Type" name="type" formControlName="type"
+          style="width:400px;display:block;margin:auto;">
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" formControlName="name"
+          style="width:400px;display:block;margin:auto;">
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="ppu" class="form-label">PPU:</label>
+        <input type="text" class="form-control" id="ppu" placeholder="Enter ppu" name="ppu" formControlName="ppu"
+          style="width:400px;display:block;margin:auto;">
+      </div>
+      <button type="submit" class="btn btn-primary" style="margin:10px;" [disabled]="pizzaGroup.invalid">Order
+        Pizza</button>
+      <button type="submit" class="btn btn-primary" style="margin:10px;" (click)="onUpdate(pizzaGroup)">Update</button>
+    </form>
+  </div>
+</div>

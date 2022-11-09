@@ -1,0 +1,51 @@
+
+<div class="row">
+  <div class="col">
+    <h1>Credit Details</h1>
+    <form [formGroup]="creditDetailsGroup" (ngSubmit)="onCreditDetailsGroupSubmit(creditDetailsGroup)">
+      <div class="mb-3 mt-3">
+        <label for="card" class="form-label">Card Number:</label>
+        <input type="number" class="form-control" id="card" placeholder="Enter card number" name="card" 
+        formControlName="card" style="width:400px;display:block;margin:auto;">
+        <div *ngIf="creditDetailsGroup.controls['card'].touched && creditDetailsGroup.controls['card'].invalid"
+          class="alert alert-danger">
+          <div *ngIf="creditDetailsGroup.controls['card'].errors && creditDetailsGroup.controls['card'].errors['required']">
+            Please enter card number</div>
+          </div>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="expiry" class="form-label">Expiry Date:</label>
+        <input type="date" class="form-control" id="expiry" placeholder="Enter date" name="expiry"
+          formControlName="expiry" style="width:400px;display:block;margin:auto;">
+          <div *ngIf="creditDetailsGroup.controls['expiry'].touched && creditDetailsGroup.controls['expiry'].invalid"
+          class="alert alert-danger">
+          <div *ngIf="creditDetailsGroup.controls['expiry'].errors && creditDetailsGroup.controls['expiry'].errors['required']">
+            Please enter the date</div>
+          </div>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" 
+        formControlName="name" style="width:400px;display:block;margin:auto;">
+        <div *ngIf="creditDetailsGroup.controls['name'].touched && creditDetailsGroup.controls['name'].invalid"
+          class="alert alert-danger">
+          <div *ngIf="creditDetailsGroup.controls['name'].errors && creditDetailsGroup.controls['name'].errors['required']">
+            Field is required</div>
+            <div *ngIf="creditDetailsGroup.controls['name'].errors && creditDetailsGroup.controls['name'].errors['pattern']">
+              </div>
+          </div>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email"
+          formControlName="email" style="width:400px;display:block;margin:auto;">
+          <div *ngIf="creditDetailsGroup.controls['email'].touched && creditDetailsGroup.controls['email'].invalid"
+          class="alert alert-danger">
+          <div *ngIf="creditDetailsGroup.controls['email'].errors && creditDetailsGroup.controls['email'].errors['required']">
+            Field is required</div>
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="creditDetailsGroup.invalid">Credit Sign In</button>
+    </form>
+  </div>
+</div>
